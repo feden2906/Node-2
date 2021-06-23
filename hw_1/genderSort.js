@@ -4,34 +4,36 @@ const path = require('path');
 const pathTime20 = path.join(__dirname, '2000');
 const pathTime18 = path.join(__dirname, '1800');
 
-fs.mkdir(`${__dirname}/boys`, {recursive: true}, (err) => {
-    console.log(err)
+fs.mkdir(path.join(__dirname, 'boys'), {recursive: true}, (err) => {
+    console.log(err);
 })
-fs.mkdir(`${__dirname}/girls`, {recursive: true}, (err) => {
-    console.log(err)
+
+fs.mkdir(path.join(__dirname, 'girls'), {recursive: true}, (err) => {
+    console.log(err);
 })
 
 const changeGender = (userPath) => {
     fs.readdir(userPath, (err, files) => {
         if (err) {
             console.log(err);
-            console.log('********ERROR*********')
+            console.log('********ERROR*********');
         }
         files.map(files => {
-            let user = require(path.join(userPath, files))
+            let user = require(path.join(userPath, files));
+
             user.gender === 'male' ?
-                fs.rename(`${userPath}/${files}`, path.join(__dirname, 'boys', files), err => {
+                fs.rename(path.join(userPath, files), path.join(__dirname, 'boys', files), err => {
                     console.log(err);
-                    console.log('********ERROR*********')
+                    console.log('********ERROR*********');
                 })
                 :
-                fs.rename(`${userPath}/${files}`, path.join(__dirname, 'girls', files), err => {
+                fs.rename(path.join(userPath, files), path.join(__dirname, 'girls', files), err => {
                     console.log(err);
-                    console.log('********ERROR*********')
+                    console.log('********ERROR*********');
                 })
         })
     })
 }
 
-changeGender(pathTime18)
-changeGender(pathTime20)
+changeGender(pathTime18);
+changeGender(pathTime20);
