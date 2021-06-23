@@ -10,10 +10,13 @@ const changeTime = (pathFile) => {
             console.log(err);
             console.log('********ERROR*********');
         }
+
         files.map(files => {
             fs.rename(path.join(pathFile, files), path.join(pathFile === pathTime18 ? pathTime20 : pathTime18, files), err => {
-                console.log(err);
-                console.log('********ERROR*********');
+                if (err) {
+                    console.log(err);
+                    console.log('********ERROR*********');
+                }
             })
         })
     })

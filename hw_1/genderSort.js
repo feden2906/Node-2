@@ -18,18 +18,22 @@ const changeGender = (userPath) => {
             console.log(err);
             console.log('********ERROR*********');
         }
+
         files.map(files => {
             let user = require(path.join(userPath, files));
 
-            user.gender === 'male' ?
-                fs.rename(path.join(userPath, files), path.join(__dirname, 'boys', files), err => {
-                    console.log(err);
-                    console.log('********ERROR*********');
-                })
-                :
-                fs.rename(path.join(userPath, files), path.join(__dirname, 'girls', files), err => {
-                    console.log(err);
-                    console.log('********ERROR*********');
+            user.gender === 'male'
+                ? fs.rename(path.join(userPath, files), path.join(__dirname, 'boys', files), err => {
+                    if (err) {
+                        console.log(err);
+                        console.log('********ERROR*********');
+                    }
+                  })
+                : fs.rename(path.join(userPath, files), path.join(__dirname, 'girls', files), err => {
+                    if (err) {
+                        console.log(err);
+                        console.log('********ERROR*********');
+                    }
                 })
         })
     })
